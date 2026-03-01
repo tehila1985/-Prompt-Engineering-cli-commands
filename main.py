@@ -1,5 +1,6 @@
 import os
 import json
+import httpx
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -12,7 +13,8 @@ api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
     raise RuntimeError("Missing OPENAI_API_KEY environment variable")
 
-client = OpenAI(api_key=api_key)
+http_client = httpx.Client(verify=False)
+client = OpenAI(api_key=api_key, http_client=http_client)
 
 app = Flask(__name__, static_folder="frontend")
 CORS(app)
