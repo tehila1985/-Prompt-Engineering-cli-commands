@@ -58,6 +58,7 @@
       border-color: #667eea;
     }
     
+
     button {
       width: 100%;
       padding: 15px;
@@ -140,6 +141,7 @@
       ></textarea>
     </div>
     
+
     <button id="analyzeBtn" onclick="analyze()">נתח ויצור פקודה</button>
     
     <div id="loading" class="loading" style="display: none;">
@@ -152,6 +154,7 @@
   <script>
     async function analyze() {
       const prompt = document.getElementById('promptInput').value.trim();
+      const level = 3;
       const resultDiv = document.getElementById('result');
       const loadingDiv = document.getElementById('loading');
       const btn = document.getElementById('analyzeBtn');
@@ -171,7 +174,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ prompt })
+          body: JSON.stringify({ prompt, level })
         });
         
         const data = await response.json();
